@@ -1,0 +1,44 @@
+﻿@using VortexSoft.Bootstrap
+@model GenericDatatables.Web.Models.Person
+
+<div class="modal-header">
+    Persoon
+</div>
+
+@using (Html.Bootstrap().BeginForm(BootstrapFormType.Horizontal, new { @class = "modal-form" })) {
+    @Html.HiddenFor(model => model.Id)
+        
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Name)
+    </div>
+    <div class="editor-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Birthday)
+    </div>
+    <div class="editor-field">
+        @Html.DisplayFor(model => model.Birthday)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Time)
+    </div>
+    <div class="editor-field">
+        @Html.DisplayFor(model => model.Time)
+    </div>
+        
+    <h3>Adres</h3>
+
+    @Html.HiddenFor(model => model.AddressId)
+        
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Address.Name)
+    </div>
+    <div class="editor-field">
+        @Html.DisplayFor(model => model.Address.Name)
+    </div>
+    
+    @Html.Bootstrap().SubmitButton("Delete", BootstrapNamedColor.Warning)
+}
