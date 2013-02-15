@@ -43,6 +43,8 @@ The signature of the LastColumn() function is:
 
 	IHtmlString LastColumn(string lastColumnHeader, Func<TEntity, IHtmlString> lastColumnHtml);
 
+Anyway, this is how the HtmlHelper works:
+	
 	@(Html.Datatable<Person>("personDatatable")
 			.Property("Id", person => person.Id)
 			.Property("Name", p => p.Name.ToLower())
