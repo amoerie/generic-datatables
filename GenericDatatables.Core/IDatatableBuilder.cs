@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Web;
 
 namespace GenericDatatables.Core
@@ -37,15 +38,54 @@ namespace GenericDatatables.Core
         IHtmlString LastColumn(string lastColumnHeader, Func<TEntity, IHtmlString> lastColumnHtml);
 
         /// <summary>
-        ///     Adds a property to the datatable
+        ///     Adds an int property to this datatable
         /// </summary>
-        /// <param name="datatableProperty">
-        ///     The datatable Property.
-        /// </param>
-        /// <returns>
-        ///     this IDatatableBuilder
-        /// </returns>
-        IDatatableBuilder<TEntity> Property(IDatatableProperty<TEntity> datatableProperty);
+        /// <param name="propertyName">The name of the property that will be used to identify this property from the incoming ajax results</param>
+        /// <param name="propertyExpression">The expression to get the property from an instance of TEntity</param>
+        /// <returns>This datatablebuilder</returns>
+        IDatatableBuilder<TEntity> Property(string propertyName, Expression<Func<TEntity, int?>> propertyExpression);
+
+        /// <summary>
+        ///     Adds a decimal property to this datatable
+        /// </summary>
+        /// <param name="propertyName">The name of the property that will be used to identify this property from the incoming ajax results</param>
+        /// <param name="propertyExpression">The expression to get the property from an instance of TEntity</param>
+        /// <returns>This datatablebuilder</returns>
+        IDatatableBuilder<TEntity> Property(string propertyName, Expression<Func<TEntity, decimal?>> propertyExpression);
+
+        /// <summary>
+        ///     Adds a double property to this datatable
+        /// </summary>
+        /// <param name="propertyName">The name of the property that will be used to identify this property from the incoming ajax results</param>
+        /// <param name="propertyExpression">The expression to get the property from an instance of TEntity</param>
+        /// <returns>This datatablebuilder</returns>
+        IDatatableBuilder<TEntity> Property(string propertyName, Expression<Func<TEntity, double?>> propertyExpression);
+
+        /// <summary>
+        ///     Adds a string property to this datatable
+        /// </summary>
+        /// <param name="propertyName">The name of the property that will be used to identify this property from the incoming ajax results</param>
+        /// <param name="propertyExpression">The expression to get the property from an instance of TEntity</param>
+        /// <returns>This datatablebuilder</returns>
+        IDatatableBuilder<TEntity> Property(string propertyName, Expression<Func<TEntity, string>> propertyExpression);
+
+        /// <summary>
+        ///     Adds a datetime property to this datatable
+        /// </summary>
+        /// <param name="propertyName">The name of the property that will be used to identify this property from the incoming ajax results</param>
+        /// <param name="propertyExpression">The expression to get the property from an instance of TEntity</param>
+        /// <param name="dateFormat">The format with which to format the date</param>
+        /// <returns>This datatablebuilder</returns>
+        IDatatableBuilder<TEntity> Property(string propertyName, Expression<Func<TEntity, DateTime?>> propertyExpression, string dateFormat);
+
+        /// <summary>
+        ///     Adds a timespan property to this datatable
+        /// </summary>
+        /// <param name="propertyName">The name of the property that will be used to identify this property from the incoming ajax results</param>
+        /// <param name="propertyExpression">The expression to get the property from an instance of TEntity</param>
+        /// <param name="timeFormat">The format with which to format the timespan</param>
+        /// <returns>This datatablebuilder</returns>
+        IDatatableBuilder<TEntity> Property(string propertyName, Expression<Func<TEntity, TimeSpan?>> propertyExpression, string timeFormat);
 
         #endregion
     }

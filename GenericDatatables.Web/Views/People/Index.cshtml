@@ -34,11 +34,11 @@
 </div>
 
 @(Html.Datatable<Person>("personDatatable")
-        .Property(new DatatableProperty<Person, int>("Id", person => person.Id))
-        .Property(new DatatableProperty<Person, string>("Name", p => p.Name.ToLower()))
-        .Property(new DatatableProperty<Person, DateTime>("Birthday", p => p.Birthday, "dd/MM/yyyy"))
-        .Property(new DatatableProperty<Person, string>("Address", p => p.Address.Street + " " + p.Address.HouseNumber))
-        .Property(new DatatableProperty<Person, TimeSpan>("Time", p => p.Time, @"hh\:mm\:ss"))
+        .Property("Id", person => person.Id)
+        .Property("Name", p => p.Name.ToLower())
+        .Property("Birthday", p => p.Birthday, "dd/MM/yyyy")
+        .Property("Address", p => p.Address.Street + " " + p.Address.HouseNumber)
+        .Property("Time", p => p.Time, @"hh\:mm\:ss")
         .LastColumn("Actions", PersonButtons))
         
 @helper PersonButtons(Person person) {

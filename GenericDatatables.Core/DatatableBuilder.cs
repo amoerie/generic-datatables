@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using GenericDatatables.Core.Session;
@@ -113,17 +114,76 @@ namespace GenericDatatables.Core
         }
 
         /// <summary>
-        ///     Adds a property to the datatable
+        ///     Adds an int property to this datatable
         /// </summary>
-        /// <param name="datatableProperty">
-        ///     The datatable Property.
-        /// </param>
-        /// <returns>
-        ///     this IDatatableBuilder
-        /// </returns>
-        public IDatatableBuilder<TEntity> Property(IDatatableProperty<TEntity> datatableProperty)
+        /// <param name="propertyName">The name of the property that will be used to identify this property from the incoming ajax results</param>
+        /// <param name="propertyExpression">The expression to get the property from an instance of TEntity</param>
+        /// <returns>This datatablebuilder</returns>
+        public IDatatableBuilder<TEntity> Property(string propertyName, Expression<Func<TEntity, int?>> propertyExpression)
         {
-            _properties.Add(datatableProperty);
+            _properties.Add(new DatatableProperty<TEntity, int?>(propertyName, propertyExpression));
+            return this;
+        }
+
+        /// <summary>
+        ///     Adds a decimal property to this datatable
+        /// </summary>
+        /// <param name="propertyName">The name of the property that will be used to identify this property from the incoming ajax results</param>
+        /// <param name="propertyExpression">The expression to get the property from an instance of TEntity</param>
+        /// <returns>This datatablebuilder</returns>
+        public IDatatableBuilder<TEntity> Property(string propertyName, Expression<Func<TEntity, decimal?>> propertyExpression)
+        {
+            _properties.Add(new DatatableProperty<TEntity, decimal?>(propertyName, propertyExpression));
+            return this;
+        }
+
+        /// <summary>
+        ///     Adds a double property to this datatable
+        /// </summary>
+        /// <param name="propertyName">The name of the property that will be used to identify this property from the incoming ajax results</param>
+        /// <param name="propertyExpression">The expression to get the property from an instance of TEntity</param>
+        /// <returns>This datatablebuilder</returns>
+        public IDatatableBuilder<TEntity> Property(string propertyName, Expression<Func<TEntity, double?>> propertyExpression)
+        {
+            _properties.Add(new DatatableProperty<TEntity, double?>(propertyName, propertyExpression));
+            return this;
+        }
+
+        /// <summary>
+        ///     Adds a string property to this datatable
+        /// </summary>
+        /// <param name="propertyName">The name of the property that will be used to identify this property from the incoming ajax results</param>
+        /// <param name="propertyExpression">The expression to get the property from an instance of TEntity</param>
+        /// <returns>This datatablebuilder</returns>
+        public IDatatableBuilder<TEntity> Property(string propertyName, Expression<Func<TEntity, string>> propertyExpression)
+        {
+            _properties.Add(new DatatableProperty<TEntity, string>(propertyName, propertyExpression));
+            return this;
+        }
+
+        /// <summary>
+        ///     Adds a datetime property to this datatable
+        /// </summary>
+        /// <param name="propertyName">The name of the property that will be used to identify this property from the incoming ajax results</param>
+        /// <param name="propertyExpression">The expression to get the property from an instance of TEntity</param>
+        /// <param name="dateFormat">The format with which to format the date</param>
+        /// <returns>This datatablebuilder</returns>
+        public IDatatableBuilder<TEntity> Property(string propertyName, Expression<Func<TEntity, DateTime?>> propertyExpression, string dateFormat)
+        {
+            _properties.Add(new DatatableProperty<TEntity, DateTime?>(propertyName, propertyExpression, dateFormat));
+            return this;
+        }
+
+        /// <summary>
+        ///     Adds a timespan property to this datatable
+        /// </summary>
+        /// <param name="propertyName">The name of the property that will be used to identify this property from the incoming ajax results</param>
+        /// <param name="propertyExpression">The expression to get the property from an instance of TEntity</param>
+        /// <param name="timeFormat">The format with which to format the timespan</param>
+        /// <returns>This datatablebuilder</returns>
+        public IDatatableBuilder<TEntity> Property(string propertyName, Expression<Func<TEntity, TimeSpan?>> propertyExpression, string timeFormat)
+        {
+            _properties.Add(new DatatableProperty<TEntity, TimeSpan?>(propertyName, propertyExpression, timeFormat));
             return this;
         }
 
