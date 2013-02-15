@@ -3,8 +3,8 @@ syntax: glob
 
 # Ignore Visual Studio 2008 files
 *.obj
-*.exe
 *.pdb
+*.exe
 *.user
 *.aps
 *.pch
@@ -80,6 +80,7 @@ UpgradeLog*.*
 [Dd]ebug/
 [Ee]xternal/
 [Oo]bj/
+[Pp]ackages/
 [Rr]elease/
 [Tt]humbs.db
 _UpgradeReport_Files
