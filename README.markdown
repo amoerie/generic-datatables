@@ -121,3 +121,76 @@ This is cool! Can I help?
 
 Sure you can! Well, maybe, shoot me an email and we can discuss it. :-)
 
+Are you sure this is really producing valid queries, and isn't loading the entire table in memory?
+--------------------------------------------------------------------------------------------------
+
+Yep! Here's some (crazy) queries that are generated:
+
+Searching for '12' in the Birthday field (which is a DateTime formatted as dd/MM/yyyy) and also 'g' in the Name field (which is a simple string)
+
+	SELECT TOP (10) 
+	[Filter1].[Id1] AS [Id], 
+	[Filter1].[Name] AS [Name], 
+	[Filter1].[Birthday] AS [Birthday], 
+	[Filter1].[Time] AS [Time], 
+	[Filter1].[AddressId] AS [AddressId], 
+	[Filter1].[Id2] AS [Id1], 
+	[Filter1].[Street] AS [Street], 
+	[Filter1].[HouseNumber] AS [HouseNumber], 
+	[Filter1].[PostalCode] AS [PostalCode], 
+	[Filter1].[City] AS [City]
+	FROM ( SELECT 	[Extent1].[Id] AS [Id1], 
+					[Extent1].[Name] AS [Name], 
+					[Extent1].[Birthday] AS [Birthday], 
+					[Extent1].[Time] AS [Time], 
+					[Extent1].[AddressId] AS [AddressId], 
+					[Extent2].[Id] AS [Id2], 
+					[Extent2].[Street] AS [Street], 
+					[Extent2].[HouseNumber] AS [HouseNumber], 
+					[Extent2].[PostalCode] AS [PostalCode], 
+					[Extent2].[City] AS [City], 
+					row_number() OVER (ORDER BY [Extent1].[Id] ASC) AS [row_number]
+		FROM  [dbo].[People] AS [Extent1]
+		INNER JOIN [dbo].[Addresses] AS [Extent2] ON [Extent1].[AddressId] = [Extent2].[Id]
+		WHERE 
+			(( CAST(CHARINDEX(LOWER(N'g'), LOWER(LOWER([Extent1].[Name]))) AS int)) > 0) 
+		AND 
+			(( CAST(CHARINDEX(LOWER(N'12'), LOWER(N'' + REPLACE(STR( CAST( DATEPART(day, [Extent1].[Birthday]) AS float)), N' ', N'') + N'/' + REPLACE(STR( CAST( DATEPART(month, [Extent1].[Birthday]) AS float)), N' ', N'') + N'/' + REPLACE(STR( CAST( DATEPART(year, [Extent1].[Birthday]) AS float)), N' ', N''))) AS int)) > 0)
+	)  AS [Filter1]
+	WHERE [Filter1].[row_number] > 0
+	ORDER BY [Filter1].[Id1] ASC
+	
+Searching for '20' in a 'Timespan' field and for 'T' in the address field (which is a navigation property of Person)
+
+	SELECT TOP (10) 
+	[Filter1].[Id1] AS [Id], 
+	[Filter1].[Name] AS [Name], 
+	[Filter1].[Birthday] AS [Birthday], 
+	[Filter1].[Time] AS [Time], 
+	[Filter1].[AddressId] AS [AddressId], 
+	[Filter1].[Id2] AS [Id1], 
+	[Filter1].[Street] AS [Street], 
+	[Filter1].[HouseNumber] AS [HouseNumber], 
+	[Filter1].[PostalCode] AS [PostalCode], 
+	[Filter1].[City] AS [City]
+	FROM ( SELECT 	[Extent1].[Id] AS [Id1], 
+					[Extent1].[Name] AS [Name], 
+					[Extent1].[Birthday] AS [Birthday], 
+					[Extent1].[Time] AS [Time], 
+					[Extent1].[AddressId] AS [AddressId], 
+					[Extent2].[Id] AS [Id2], 
+					[Extent2].[Street] AS [Street], 
+					[Extent2].[HouseNumber] AS [HouseNumber], 
+					[Extent2].[PostalCode] AS [PostalCode], 
+					[Extent2].[City] AS [City], 
+					row_number() OVER (ORDER BY [Extent1].[Time] ASC) AS [row_number]
+		FROM  [dbo].[People] AS [Extent1]
+		INNER JOIN [dbo].[Addresses] AS [Extent2] ON [Extent1].[AddressId] = [Extent2].[Id]
+		WHERE 
+			(( CAST(CHARINDEX(LOWER(N'20'), LOWER(N'' + REPLACE(STR( CAST( DATEPART(hour, [Extent1].[Time]) AS float)), N' ', N'') + N'\' + N':' + REPLACE(STR( CAST( DATEPART(minute, [Extent1].[Time]) AS float)), N' ', N'') + N'\' + N':' + REPLACE(STR( CAST( DATEPART(second, [Extent1].[Time]) AS float)), N' ', N''))) AS int)) > 0)
+		AND 
+			(( CAST(CHARINDEX(LOWER(N'T'), LOWER([Extent2].[Street] + N' ' + [Extent2].[HouseNumber])) AS int)) > 0)
+	)  AS [Filter1]
+	WHERE [Filter1].[row_number] > 0
+	ORDER BY [Filter1].[Time] ASC
+
