@@ -165,9 +165,10 @@ Searching for '12' in the Birthday field (which is a DateTime formatted as dd/MM
 	WHERE [Filter1].[row_number] > 0
 	ORDER BY [Filter1].[Id1] ASC
 ```
-```SQL
+
 Searching for '20' in a 'Timespan' field and for 'T' in the address field (which is a navigation property of Person)
 
+```SQL
 	SELECT TOP (10) 
 	[Filter1].[Id1] AS [Id], 
 	[Filter1].[Name] AS [Name], 
