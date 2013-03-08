@@ -45,6 +45,7 @@ The signature of the LastColumn() function is:
 
 Anyway, this is how the HtmlHelper works:
 	
+```c#
 	@(Html.Datatable<Person>("personDatatable")
 			.Property("Id", person => person.Id)
 			.Property("Name", p => p.Name.ToLower())
@@ -57,6 +58,7 @@ Anyway, this is how the HtmlHelper works:
 		<a href="@Url.Action("PersonForm", new { id = person.Id})" class="btn btn-primary btn-edit">Edit</a>
 		<a href="@person.Id" class="btn btn-danger">Delete</a>
 	}
+```
 
 # Step 2: The model binder
 
@@ -83,6 +85,7 @@ However, because the library does most of the heavy work, you only have to glue 
 Somewhere along the way I considered generating the necessary javascript with the HtmlHelper as well. I wanted to keep full control of the javascript though, so in the end I decided against it.
 This means you need to write the following javascript to get the datatable to actually do something:
 
+```javascript
      $("#personDatatable").dataTable({
         bProcessing: true,
         bServerSide: true,
@@ -102,6 +105,7 @@ This means you need to write the following javascript to get the datatable to ac
             bindButton($(".btn-edit"));
         }
     });
+```
 
 # That's it!
 
@@ -128,6 +132,7 @@ Yep! Here's some (crazy) queries that are generated:
 
 Searching for '12' in the Birthday field (which is a DateTime formatted as dd/MM/yyyy) and also 'g' in the Name field (which is a simple string)
 
+```sql
 	SELECT TOP (10) 
 	[Filter1].[Id1] AS [Id], 
 	[Filter1].[Name] AS [Name], 
@@ -159,7 +164,8 @@ Searching for '12' in the Birthday field (which is a DateTime formatted as dd/MM
 	)  AS [Filter1]
 	WHERE [Filter1].[row_number] > 0
 	ORDER BY [Filter1].[Id1] ASC
-	
+```
+```SQL
 Searching for '20' in a 'Timespan' field and for 'T' in the address field (which is a navigation property of Person)
 
 	SELECT TOP (10) 
@@ -193,4 +199,4 @@ Searching for '20' in a 'Timespan' field and for 'T' in the address field (which
 	)  AS [Filter1]
 	WHERE [Filter1].[row_number] > 0
 	ORDER BY [Filter1].[Time] ASC
-
+```
