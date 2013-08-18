@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A26DEA4D-3682-4018-AB5C-6C92455BD750}</ProjectGuid>
+    <ProjectGuid>{2C97D639-A182-4E4B-BA43-4EB538A7C238}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GenericDatatables.Core</RootNamespace>
     <AssemblyName>GenericDatatables.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -23,8 +22,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>ExtendedDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,45 +32,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="LinqKit">
+    <Reference Include="LinqKit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\LinqKit.1.0\lib\35\LinqKit.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -81,33 +52,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatatableBuilder.cs" />
-    <Compile Include="DatatableParam.cs" />
-    <Compile Include="DatatableParamConverter.cs" />
-    <Compile Include="DatatableParser.cs" />
-    <Compile Include="DatatableProperty.cs" />
-    <Compile Include="DatatableReply.cs" />
-    <Compile Include="DatatableReplyConverter.cs" />
-    <Compile Include="Filter\DatatableFilter.cs" />
-    <Compile Include="Filter\DatatablePropertyFilter.cs" />
-    <Compile Include="Helper\DatatableExpressionsHelper.cs" />
-    <Compile Include="Helper\DatatableGenericTypeHelper.cs" />
-    <Compile Include="Helper\DatatableHtmlHelper.cs" />
-    <Compile Include="Helper\DatatableModelBindingContextHelper.cs" />
-    <Compile Include="Helper\IDatatableConstructorBuilder.cs" />
-    <Compile Include="Helper\IDatatableInstanceBuilder.cs" />
-    <Compile Include="Helper\IDatatableTypeBuilder.cs" />
-    <Compile Include="IDatatableBuilder.cs" />
-    <Compile Include="IDatatableProperty.cs" />
+    <Compile Include="Base\Contracts\IDeletable.cs" />
+    <Compile Include="Base\Contracts\IEntityFilter.cs" />
+    <Compile Include="Base\Contracts\IEntityIncluder.cs" />
+    <Compile Include="Base\Contracts\IEntitySorter.cs" />
+    <Compile Include="Base\Contracts\IIdentifiable.cs" />
+    <Compile Include="Base\Models\Entity.cs" />
+    <Compile Include="Base\Repositories\IRepository.cs" />
+    <Compile Include="Domain\Models\Exercise.cs" />
+    <Compile Include="Domain\Models\GymMember.cs" />
+    <Compile Include="Domain\Repositories\IGymMemberRepository.cs" />
+    <Compile Include="Infrastructure\Attributes\ApiAttributes.cs" />
+    <Compile Include="Infrastructure\Filtering\EntityFilter.cs" />
+    <Compile Include="Infrastructure\Filtering\ExtensionsForIEntityFilter.cs" />
+    <Compile Include="Infrastructure\Filtering\WhereEntityFilter.cs" />
+    <Compile Include="Infrastructure\Including\DummyPropertyInclusionHolder.cs" />
+    <Compile Include="Infrastructure\Including\EntityIncluder.cs" />
+    <Compile Include="Infrastructure\Including\ExtensionsForIEntityIncluder.cs" />
+    <Compile Include="Infrastructure\Including\IPropertyInclusionHolder.cs" />
+    <Compile Include="Infrastructure\Including\PropertyInclusionHolder.cs" />
+    <Compile Include="Infrastructure\Sorting\EntitySorter.cs" />
+    <Compile Include="Infrastructure\Sorting\EntitySorterBuilder.cs" />
+    <Compile Include="Infrastructure\Sorting\ExtensionsForIEntitySorter.cs" />
+    <Compile Include="Infrastructure\Sorting\OrderByEntitySorter.cs" />
+    <Compile Include="Infrastructure\Sorting\SortDirection.cs" />
+    <Compile Include="Infrastructure\Sorting\ThenByEntitySorter.cs" />
+    <Compile Include="Infrastructure\Utilities\IMultiDictionary.cs" />
+    <Compile Include="Infrastructure\Utilities\MultiDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Session\DatatableSessionHelper.cs" />
-    <Compile Include="Session\DatatableSessionObject.cs" />
-    <Compile Include="Sort\DatatablePropertySorter.cs" />
-    <Compile Include="Sort\DatatableSorter.cs" />
-    <Compile Include="Sort\IDatatablePropertySorter.cs" />
-    <Compile Include="Utilities\DatatableEntityProjector.cs" />
-    <Compile Include="Utilities\DatatableSpecialCharacters.cs" />
-    <Compile Include="Utilities\DatatableSqlFunctions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

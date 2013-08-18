@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericDatatables.Core", "GenericDatatables.Core\GenericDatatables.Core.csproj", "{A26DEA4D-3682-4018-AB5C-6C92455BD750}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericDatatables.Web", "GenericDatatables.Web\GenericDatatables.Web.csproj", "{ECA3A4E3-32EF-4290-89D8-9C5A8F2F1838}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2D159075-BAA1-44E0-9538-A4466AF88FBC}"
@@ -14,16 +12,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2D1590
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericDatatables.Test", "GenericDatatables.Test\GenericDatatables.Test.csproj", "{1B3F907A-19D6-4132-B6BC-FB0F2801B5C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericDatatables.Datatables", "GenericDatatables.Datatables\GenericDatatables.Datatables.csproj", "{35659A5B-8F1F-4EF4-81AE-1DA48A1B50D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericDatatables.Core", "GenericDatatables.Core\GenericDatatables.Core.csproj", "{2C97D639-A182-4E4B-BA43-4EB538A7C238}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericDatatables.Default", "GenericDatatables.Default\GenericDatatables.Default.csproj", "{FF5FC8F9-1BF9-4DCE-BBAC-53B0BD8E1FA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A26DEA4D-3682-4018-AB5C-6C92455BD750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A26DEA4D-3682-4018-AB5C-6C92455BD750}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A26DEA4D-3682-4018-AB5C-6C92455BD750}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A26DEA4D-3682-4018-AB5C-6C92455BD750}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ECA3A4E3-32EF-4290-89D8-9C5A8F2F1838}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ECA3A4E3-32EF-4290-89D8-9C5A8F2F1838}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECA3A4E3-32EF-4290-89D8-9C5A8F2F1838}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -32,6 +32,18 @@ Global
 		{1B3F907A-19D6-4132-B6BC-FB0F2801B5C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B3F907A-19D6-4132-B6BC-FB0F2801B5C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B3F907A-19D6-4132-B6BC-FB0F2801B5C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35659A5B-8F1F-4EF4-81AE-1DA48A1B50D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35659A5B-8F1F-4EF4-81AE-1DA48A1B50D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35659A5B-8F1F-4EF4-81AE-1DA48A1B50D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35659A5B-8F1F-4EF4-81AE-1DA48A1B50D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C97D639-A182-4E4B-BA43-4EB538A7C238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C97D639-A182-4E4B-BA43-4EB538A7C238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C97D639-A182-4E4B-BA43-4EB538A7C238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C97D639-A182-4E4B-BA43-4EB538A7C238}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF5FC8F9-1BF9-4DCE-BBAC-53B0BD8E1FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF5FC8F9-1BF9-4DCE-BBAC-53B0BD8E1FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF5FC8F9-1BF9-4DCE-BBAC-53B0BD8E1FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF5FC8F9-1BF9-4DCE-BBAC-53B0BD8E1FA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

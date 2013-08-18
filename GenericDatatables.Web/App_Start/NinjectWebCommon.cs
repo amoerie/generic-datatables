@@ -1,4 +1,6 @@
-using GenericDatatables.Web.Persistence;
+using GenericDatatables.Core.Domain.Repositories;
+using GenericDatatables.Default.Database;
+using GenericDatatables.Default.Persistence.Repositories;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(GenericDatatables.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(GenericDatatables.Web.App_Start.NinjectWebCommon), "Stop")]
@@ -55,8 +57,8 @@ namespace GenericDatatables.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<DataContext>().ToSelf().InRequestScope();
-            kernel.Bind(typeof (IRepository<>)).To(typeof (Repository<>));
+            kernel.Bind<GymContext>().ToSelf().InRequestScope();
+            kernel.Bind<IGymMemberRepository>().To<GymMemberRepository>();
         }        
     }
 }

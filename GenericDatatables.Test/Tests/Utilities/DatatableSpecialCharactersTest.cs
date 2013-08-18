@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using GenericDatatables.Core.Utilities;
 using NUnit.Framework;
 
 namespace GenericDatatables.Test.Tests.Utilities

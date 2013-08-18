@@ -1,5 +1,4 @@
 ﻿using System.Web;
-using GenericDatatables.Core.Session;
 using GenericDatatables.Test.Mocks;
 using GenericDatatables.Test.Models;
 using NUnit.Framework;

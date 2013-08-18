@@ -186,11 +186,11 @@ a.btn {
 
 /* Property specific searching */
 
-tfoot input.search_init {
+thead tr.datatable-column-filters input.search_init {
 	color: #999;
 }
 
-tfoot tr th div.controls div.input-prepend input {
+thead tr.datatable-column-filters input {
     width: 80px;
 }
 

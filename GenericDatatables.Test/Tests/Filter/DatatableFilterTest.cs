@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using GenericDatatables.Core;
-using GenericDatatables.Core.Filter;
 using GenericDatatables.Test.Models;
 using NUnit.Framework;
 

@@ -79,10 +79,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GenericDatatables.Core\GenericDatatables.Core.csproj">
-      <Project>{a26dea4d-3682-4018-ab5c-6c92455bd750}</Project>
-      <Name>GenericDatatables.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GenericDatatables.Web\GenericDatatables.Web.csproj">
       <Project>{ECA3A4E3-32EF-4290-89D8-9C5A8F2F1838}</Project>
       <Name>GenericDatatables.Web</Name>

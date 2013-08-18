@@ -1,0 +1,40 @@
+﻿@using GenericDatatables.Core.Domain.Models
+@using GenericDatatables.Datatables.Html.HtmlHelpers
+
+@(Html.Datatable<GymMember>(Url.Action("GymMemberList"), "GymMembersTable")
+
+      .Column("Name")
+      .Display(gymMember => string.Format("{0} {1}", gymMember.FirstName, gymMember.LastName))
+      .Sort(gymMember => gymMember.FirstName)
+      .Sort(gymMember => gymMember.LastName)
+      .Search((gymMember, search) => gymMember.FirstName.ToLower().Contains(search.ToLower()) || gymMember.LastName.ToLower().Contains(search.ToLower()))
+      .Width("15%")
+
+      .Column("Date Of Birth", gymMember => gymMember.DateOfBirth)
+      .Display(gymMember => gymMember.DateOfBirth.HasValue ? gymMember.DateOfBirth.Value.ToShortDateString() : string.Empty)
+      .Width("15%")
+      
+      .Column("Weight", gymMember => gymMember.Weight)
+      .Display(gymMember => string.Format("{0:0.00} kg", gymMember.Weight))
+      .Width("15%")
+
+      .Column("Membership Price", gymMember => gymMember.MembershipPrice)
+      .Display(gymMember => string.Format("{0:C}", gymMember.MembershipPrice))
+      .Width("10%")
+
+      .Column("Average Exercise Time",gymMember => gymMember.AverageExerciseTime)
+      .Display(gymMember => gymMember.AverageExerciseTime.HasValue ? gymMember.AverageExerciseTime.Value.ToString("hh\\:mm\\:ss") : string.Empty)
+      .Width("10%")
+    
+      .Column("Exercises", gymMember => gymMember.Excercises)            
+      .Display(gymMember => ShowExercises(gymMember).ToHtmlString())
+      .Width("35%")
+      .Search((gymMember, search) => gymMember.Excercises.Any(e => e.Name.ToLower().Contains(search.ToLower())))
+      
+      .ToHtml())
+
+
+@helper ShowExercises(GymMember gymMember)
+{
+    <label>@string.Join(",", gymMember.Excercises.Select(e => e.Name))</label>
+}

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace GenericDatatables.Test.Models
+﻿namespace GenericDatatables.Test.Models
 {
     public class Address
     {

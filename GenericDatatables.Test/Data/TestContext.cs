@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using GenericDatatables.Test.Models;
+﻿using GenericDatatables.Test.Models;
 
 namespace GenericDatatables.Test.Data
 {

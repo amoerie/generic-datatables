@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using GenericDatatables.Core;
-using GenericDatatables.Web.Persistence;
+using GenericDatatables.Datatables;
+using GenericDatatables.Datatables.Remote;
+using GenericDatatables.Datatables.Remote.Request;
+using GenericDatatables.Default.Database;
+using StackExchange.Profiling;
 
 namespace GenericDatatables.Web
 {
@@ -25,9 +24,21 @@ namespace GenericDatatables.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+            DatatableConfig.Register();
 
-            ModelBinders.Binders.Add(typeof(DatatableParam), new DatatableParamConverter());
-            Database.SetInitializer(new DataInitializer());
+            ModelBinders.Binders.Add(typeof(DatatableRequest), new DatatableRequestModelBinder());
+            Database.SetInitializer(new GymInitializer());
         }
+
+        protected void Application_BeginRequest()
+        {
+            if (Request.IsLocal)
+            {
+                MiniProfiler.Start();
+            }
+        }
+
     }
+
+
 }

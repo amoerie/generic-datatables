@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Web.WebPages.OAuth;
-using GenericDatatables.Web.Models;
-
-namespace GenericDatatables.Web
+﻿namespace GenericDatatables.Web
 {
     public static class AuthConfig
     {
