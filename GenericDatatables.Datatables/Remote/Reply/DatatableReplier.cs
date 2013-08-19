@@ -49,7 +49,6 @@ namespace GenericDatatables.Datatables.Remote.Reply
         /// Returns an instance of <see cref="DatatableReply"/> in response to the <paramref name="request"/>
         /// </summary>
         /// <param name="request">The request to respond to</param>
-        /// <param name="totalFilter">Filters the total count</param>
         /// <returns>an instance of <see cref="DatatableReply"/> in response to the <paramref name="request"/></returns>
         public JsonResult Reply(DatatableRequest request)
         {
@@ -68,7 +67,7 @@ namespace GenericDatatables.Datatables.Remote.Reply
                 var dataForEntity = new Dictionary<string, string>();
                 foreach (var column in Datatable.Columns)
                 {
-                    dataForEntity[column.Name] = column.DisplayComponent(entity);
+                    dataForEntity[column.Name] = column.DisplayFunction(entity);
                 }
                 data[i] = dataForEntity;
             }

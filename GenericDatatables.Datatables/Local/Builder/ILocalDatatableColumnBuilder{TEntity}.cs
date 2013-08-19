@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using GenericDatatables.Core.Infrastructure.Attributes.JetBrains.Annotations;
 using GenericDatatables.Datatables.Html.SearchComponents;
 
@@ -11,6 +12,8 @@ namespace GenericDatatables.Datatables.Local.Builder
     public interface ILocalDatatableColumnBuilder<TEntity>: ILocalDatatableBuilder<TEntity> where TEntity : class
     {
         ILocalDatatableColumnBuilder<TEntity> Display([NotNull] Func<TEntity, string> display);
+
+        ILocalDatatableColumnBuilder<TEntity> Display([NotNull] Func<TEntity, IHtmlString> display);
 
         ILocalDatatableColumnBuilder<TEntity> Sortable(bool sortable);
 

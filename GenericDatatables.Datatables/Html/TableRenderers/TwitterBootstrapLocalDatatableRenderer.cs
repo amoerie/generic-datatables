@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using GenericDatatables.Datatables.Extensions;
 using GenericDatatables.Datatables.Local;
 
-namespace GenericDatatables.Datatables.Html.Renderers.Table
+namespace GenericDatatables.Datatables.Html.TableRenderers
 {
     public class TwitterBootstrapLocalDatatableRenderer: ILocalDatatableRenderer
     {
@@ -62,7 +62,7 @@ namespace GenericDatatables.Datatables.Html.Renderers.Table
                 var tbodyrow = new TagBuilder("tr");
                 foreach (var column in localDatatable.Columns)
                 {
-                    tbodyrow.AppendHtml(new TagBuilder("td").Html(column.DisplayComponent.ToHtml(htmlHelper, entity, column)));
+                    tbodyrow.AppendHtml(new TagBuilder("td").Html(column.DisplayFunction(entity)));
                 }
                 tbody.AppendHtml(tbodyrow);
             }

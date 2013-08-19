@@ -4,7 +4,7 @@ using GenericDatatables.Core.Base.Models;
 using GenericDatatables.Datatables.Extensions;
 using GenericDatatables.Datatables.Remote;
 
-namespace GenericDatatables.Datatables.Html.Renderers.Table
+namespace GenericDatatables.Datatables.Html.TableRenderers
 {
     public class TwitterBootstrapRemoteDatatableRenderer: IRemoteDatatableRenderer
     {

@@ -12,14 +12,14 @@ namespace GenericDatatables.Web
     {
         public static void Register()
         {
-            DatatableConfiguration.Html.Components.SearchComponents.Register(typeof(bool), DatatableDefaults.Html.Components.SearchComponents.Boolean);
-            DatatableConfiguration.Html.Components.SearchComponents.Register(typeof(bool?), DatatableDefaults.Html.Components.SearchComponents.Boolean);
-            DatatableConfiguration.Html.Components.SearchComponents.Register(typeof(DateTime?), DatatableDefaults.Html.Components.SearchComponents.DateTime);
-            DatatableConfiguration.Html.Components.SearchComponents.Register(typeof(DateTime), DatatableDefaults.Html.Components.SearchComponents.DateTime);
-            DatatableConfiguration.Html.Components.SearchComponents.Default = DatatableDefaults.Html.Components.SearchComponents.Text;
+            DatatableConfiguration.Components.SearchComponents.Register(typeof(bool), DatatableDefaults.Html.SearchComponents.Boolean);
+            DatatableConfiguration.Components.SearchComponents.Register(typeof(bool?), DatatableDefaults.Html.SearchComponents.Boolean);
+            DatatableConfiguration.Components.SearchComponents.Register(typeof(DateTime?), DatatableDefaults.Html.SearchComponents.DateTime);
+            DatatableConfiguration.Components.SearchComponents.Register(typeof(DateTime), DatatableDefaults.Html.SearchComponents.DateTime);
+            DatatableConfiguration.Components.SearchComponents.Default = DatatableDefaults.Html.SearchComponents.Text;
 
-            DatatableConfiguration.Html.Renderers.Table.LocalDatatableRenderer = DatatableDefaults.Html.Renderers.Table.TwitterBootstrapLocal;
-            DatatableConfiguration.Html.Renderers.Table.RemoteDatatableRenderer = DatatableDefaults.Html.Renderers.Table.TwitterBootstrapRemote;
+            DatatableConfiguration.TableRenderers.LocalDatatableRenderer = DatatableDefaults.Html.TableRenderers.TwitterBootstrapLocal;
+            DatatableConfiguration.TableRenderers.RemoteDatatableRenderer = DatatableDefaults.Html.TableRenderers.TwitterBootstrapRemote;
         }
     }
 }

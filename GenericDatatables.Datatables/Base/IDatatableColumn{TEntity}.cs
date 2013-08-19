@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
+using GenericDatatables.Core.Base.Models;
 using GenericDatatables.Datatables.Html.Components.DisplayComponents;
 using GenericDatatables.Datatables.Html.SearchComponents;
 using GenericDatatables.Datatables.Validation;
@@ -20,10 +22,10 @@ namespace GenericDatatables.Datatables.Base
         string Name { get; set; }
         
         /// <summary>
-        ///     Gets or sets the function 
-        /// </summary>
-        IDisplayComponent DisplayComponent { get; set; }
-
+        ///     Gets or sets the display function 
+        /// </summary>.
+        Func<TEntity, string> DisplayFunction { get; set; } 
+        
         /// <summary>
         /// Gets or sets a value indicating whether this column is sortable or not
         /// </summary>
@@ -63,6 +65,5 @@ namespace GenericDatatables.Datatables.Base
         IEnumerable<DatatableValidationResult> Validate();
 
         void SetAttributes(TagBuilder th);
-
     }
 }

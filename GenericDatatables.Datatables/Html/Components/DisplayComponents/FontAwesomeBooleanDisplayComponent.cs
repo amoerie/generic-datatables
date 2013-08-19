@@ -12,11 +12,12 @@ using GenericDatatables.Datatables.Extensions;
 
 namespace GenericDatatables.Datatables.Html.Components.DisplayComponents
 {
-    public class BooleanDisplayComponent: PropertyDisplayComponent<bool?>
+    public class FontAwesomeBooleanDisplayComponent: IDisplayComponent<bool?>
     {
-        protected override IHtmlString ToHtml <TEntity>(HtmlHelper htmlHelper, TEntity entity, bool? propertyValue, IDatatableColumn<TEntity> column)
+        public IHtmlString ToHtml <TEntity>(TEntity entity, IDatatableColumn<TEntity, bool?> datatableColumn) where TEntity : class
         {
-            switch (propertyValue)
+            var value = datatableColumn.PropertyExpression.Compile().Invoke(entity);
+            switch (value)
             {
                 case null:
                     return MvcHtmlString.Create(string.Empty);

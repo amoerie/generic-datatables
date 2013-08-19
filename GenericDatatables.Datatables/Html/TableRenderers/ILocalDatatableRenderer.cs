@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using GenericDatatables.Datatables.Local;
 
-namespace GenericDatatables.Datatables.Html.Renderers.Table
+namespace GenericDatatables.Datatables.Html.TableRenderers
 {
     public interface ILocalDatatableRenderer
     {

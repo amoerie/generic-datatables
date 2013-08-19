@@ -12,6 +12,8 @@ namespace GenericDatatables.Datatables.Remote.Builder
     {
         IRemoteDatatableColumnBuilder<TEntity> Display([NotNull] Func<TEntity, string> display);
 
+        IRemoteDatatableColumnBuilder<TEntity> Display([NotNull] Func<TEntity, IHtmlString> display);
+
         IRemoteDatatableColumnBuilder<TEntity> Sort<TProperty>([NotNull] Expression<Func<TEntity, TProperty>> property);
 
         IRemoteDatatableColumnBuilder<TEntity> Search([NotNull] Expression<Func<TEntity, string, bool>> searchFilter);

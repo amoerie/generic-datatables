@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GenericDatatables.Core.Base.Contracts;
 using GenericDatatables.Core.Base.Models;
 using GenericDatatables.Datatables.Base;
+using GenericDatatables.Datatables.Config;
 using GenericDatatables.Datatables.Remote.Filtering;
 using GenericDatatables.Datatables.Remote.Sorting;
 using GenericDatatables.Datatables.Validation;
@@ -13,7 +15,7 @@ namespace GenericDatatables.Datatables.Remote
     /// Represents a column in an instance of <see cref="RemoteDatatable{TEntity}"/>
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity</typeparam>
-    public sealed class RemoteDatatableColumn<TEntity> : DatatableColumn<TEntity>, IRemoteDatatableColumn<TEntity> where TEntity : Entity
+    public class RemoteDatatableColumn<TEntity> : DatatableColumn<TEntity>, IRemoteDatatableColumn<TEntity> where TEntity : Entity
     {
         private ICollection<IDatatablePropertySorter<TEntity>> _propertySorters;
 
@@ -25,11 +27,13 @@ namespace GenericDatatables.Datatables.Remote
 
         public IDatatablePropertyFilter<TEntity> PropertyFilter { get; set; }
 
-        public RemoteDatatableColumn()
+        public RemoteDatatableColumn(string header)
         {
-            Sortable = true;
-            Searchable = true;
-            Visible = true;
+            Header = header;
+            Name = Guid.NewGuid().ToString();
+            Sortable = false;
+            Searchable = false;
+            SearchComponent = DatatableConfiguration.Components.SearchComponents.Default;
         }
 
         public IEntitySorter<TEntity> Sort(IEntitySorter<TEntity> sorter, SortDirection sortDirection)

@@ -17,15 +17,15 @@ namespace GenericDatatables.Datatables.Local.Builder
         ILocalDatatableColumnBuilder<TEntity> Column([NotNull] string header);
 
         // adds a property column to the datatable
-        ILocalDatatableColumnBuilder<TEntity> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, bool?>> propertyExpression);
-        ILocalDatatableColumnBuilder<TEntity> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, int?>> propertyExpression);
-        ILocalDatatableColumnBuilder<TEntity> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, double?>> propertyExpression);
-        ILocalDatatableColumnBuilder<TEntity> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, decimal?>> propertyExpression);
-        ILocalDatatableColumnBuilder<TEntity> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, long?>> propertyExpression);
-        ILocalDatatableColumnBuilder<TEntity> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, short?>> propertyExpression);
-        ILocalDatatableColumnBuilder<TEntity> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, string>> propertyExpression);
-        ILocalDatatableColumnBuilder<TEntity> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, DateTime?>> propertyExpression);
-        ILocalDatatableColumnBuilder<TEntity> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, TimeSpan?>> propertyExpression);
-        ILocalDatatableColumnBuilder<TEntity> Column<TProperty>([NotNull] string header, [NotNull] Expression<Func<TEntity, ICollection<TProperty>>> propertyExpression);
+        ILocalDatatableColumnBuilder<TEntity, bool?> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, bool?>> propertyExpression);
+        ILocalDatatableColumnBuilder<TEntity, int?> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, int?>> propertyExpression);
+        ILocalDatatableColumnBuilder<TEntity, double?> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, double?>> propertyExpression);
+        ILocalDatatableColumnBuilder<TEntity, decimal?> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, decimal?>> propertyExpression);
+        ILocalDatatableColumnBuilder<TEntity, long?> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, long?>> propertyExpression);
+        ILocalDatatableColumnBuilder<TEntity, short?> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, short?>> propertyExpression);
+        ILocalDatatableColumnBuilder<TEntity, string> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, string>> propertyExpression);
+        ILocalDatatableColumnBuilder<TEntity, DateTime?> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, DateTime?>> propertyExpression);
+        ILocalDatatableColumnBuilder<TEntity, TimeSpan?> Column([NotNull] string header, [NotNull] Expression<Func<TEntity, TimeSpan?>> propertyExpression);
+        ILocalDatatableColumnBuilder<TEntity, ICollection<TProperty>> Column<TProperty>([NotNull] string header, [NotNull] Expression<Func<TEntity, ICollection<TProperty>>> propertyExpression);
     }
 }

@@ -11,7 +11,6 @@ using GenericDatatables.Datatables.Base;
 using GenericDatatables.Datatables.Config;
 using GenericDatatables.Datatables.Extensions;
 using GenericDatatables.Datatables.Remote.Filtering;
-using GenericDatatables.Datatables.Remote.Sorting;
 using LinqKit;
 
 namespace GenericDatatables.Datatables.Remote.Builder
@@ -27,210 +26,147 @@ namespace GenericDatatables.Datatables.Remote.Builder
 
         public IRemoteDatatableColumnBuilder<TEntity> Column(string header)
         {
-            var column = new RemoteDatatableColumn<TEntity>
-            {
-                Header = header,
-                Name = Guid.NewGuid().ToString(),
-                Sortable = false,
-                Searchable = false,
-                SearchComponent = DatatableConfiguration.Html.Components.SearchComponents.Default
-            };
+            var column = new RemoteDatatableColumn<TEntity>(header);
             _remoteDatatable.Columns.Add(column);
             return new RemoteDatatableColumnBuilder<TEntity>(this, column);
         }
 
-        public IRemoteDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, bool?>> propertyExpression)
+        public IRemoteDatatableColumnBuilder<TEntity, bool?> Column(string header, Expression<Func<TEntity, bool?>> propertyExpression)
         {
-            var propertyFunction = propertyExpression.Compile();
-            var column = new RemoteDatatableColumn<TEntity>
+            var column = new RemoteDatatableColumn<TEntity, bool?>(header, propertyExpression)
             {
-                Header = header,
-                Name = ExpressionHelper.GetExpressionText(propertyExpression).Replace(".", string.Empty),
-                DisplayComponent = entity => Convert.ToString(propertyFunction(entity)),
                 PropertyFilter = new DatatablePropertyFilter<TEntity, bool?>
                 {
-                    SearchParser = search => search == null ? (bool?) null : search == "true",
+                    SearchParser = search => search == null ? (bool?) null : string.Equals(search, "true", StringComparison.InvariantCultureIgnoreCase),
                     SearchFilter = (entity, search) => propertyExpression.Invoke(entity) == search
                 },
-                PropertySorters = new List<IDatatablePropertySorter<TEntity>> { new DatatablePropertySorter<TEntity, bool?>(propertyExpression) },
-                SearchComponent = DatatableConfiguration.Html.Components.SearchComponents.Lookup<bool?>()
             };
             _remoteDatatable.Columns.Add(column);
-            return new RemoteDatatableColumnBuilder<TEntity>(this, column);
+            return new RemoteDatatableColumnBuilder<TEntity, bool?>(this, column);
         }
 
-        public IRemoteDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, int?>> propertyExpression)
+        public IRemoteDatatableColumnBuilder<TEntity, int?> Column(string header, Expression<Func<TEntity, int?>> propertyExpression)
         {
-            var propertyFunction = propertyExpression.Compile();
-            var column = new RemoteDatatableColumn<TEntity>
+            var column = new RemoteDatatableColumn<TEntity, int?>(header, propertyExpression)
             {
-                Header = header,
-                Name = ExpressionHelper.GetExpressionText(propertyExpression).Replace(".", string.Empty),
-                DisplayComponent = entity => Convert.ToString(propertyFunction(entity)),
                 PropertyFilter = new DatatablePropertyFilter<TEntity, string>
                 {
                     SearchParser = search => search,
                     SearchFilter = (entity, search) => SqlFunctions.StringConvert((double?) propertyExpression.Invoke(entity)).ToLower().Contains(search.ToLower())
                 },
-                PropertySorters = new List<IDatatablePropertySorter<TEntity>> { new DatatablePropertySorter<TEntity, int?>(propertyExpression) },
-                SearchComponent = DatatableConfiguration.Html.Components.SearchComponents.Lookup<int?>()
             };
             _remoteDatatable.Columns.Add(column);
-            return new RemoteDatatableColumnBuilder<TEntity>(this, column);
+            return new RemoteDatatableColumnBuilder<TEntity, int?>(this, column);
         }
 
-        public IRemoteDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, double?>> propertyExpression)
+        public IRemoteDatatableColumnBuilder<TEntity, double?> Column(string header, Expression<Func<TEntity, double?>> propertyExpression)
         {
-            var propertyFunction = propertyExpression.Compile();
-            var column = new RemoteDatatableColumn<TEntity>
+            var column = new RemoteDatatableColumn<TEntity, double?>(header, propertyExpression)
             {
-                Header = header,
-                Name = ExpressionHelper.GetExpressionText(propertyExpression).Replace(".", string.Empty),
-                DisplayComponent = entity => Convert.ToString(propertyFunction(entity)),
                 PropertyFilter = new DatatablePropertyFilter<TEntity, string>
                 {
                     SearchParser = search => search,
                     SearchFilter = (entity, search) => SqlFunctions.StringConvert(propertyExpression.Invoke(entity)).ToLower().Contains(search.ToLower())
                 },
-                PropertySorters = new List<IDatatablePropertySorter<TEntity>> { new DatatablePropertySorter<TEntity, double?>(propertyExpression) },
-                SearchComponent = DatatableConfiguration.Html.Components.SearchComponents.Lookup<double?>()
             };
             _remoteDatatable.Columns.Add(column);
-            return new RemoteDatatableColumnBuilder<TEntity>(this, column);
+            return new RemoteDatatableColumnBuilder<TEntity, double?>(this, column);
         }
 
-        public IRemoteDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, decimal?>> propertyExpression)
+        public IRemoteDatatableColumnBuilder<TEntity, decimal?> Column(string header, Expression<Func<TEntity, decimal?>> propertyExpression)
         {
-            var propertyFunction = propertyExpression.Compile();
-            var column = new RemoteDatatableColumn<TEntity>
+            var column = new RemoteDatatableColumn<TEntity, decimal?>(header, propertyExpression)
             {
-                Header = header,
-                Name = ExpressionHelper.GetExpressionText(propertyExpression).Replace(".", string.Empty),
-                DisplayComponent = entity => Convert.ToString(propertyFunction(entity)),
                 PropertyFilter = new DatatablePropertyFilter<TEntity, string>
                 {
                     SearchParser = search => search,
                     SearchFilter = (entity, search) => SqlFunctions.StringConvert(propertyExpression.Invoke(entity)).ToLower().Contains(search.ToLower())
                 },
-                PropertySorters = new List<IDatatablePropertySorter<TEntity>> { new DatatablePropertySorter<TEntity, decimal?>(propertyExpression) },
-                SearchComponent = DatatableConfiguration.Html.Components.SearchComponents.Lookup<decimal?>()
             };
             _remoteDatatable.Columns.Add(column);
-            return new RemoteDatatableColumnBuilder<TEntity>(this, column);
+            return new RemoteDatatableColumnBuilder<TEntity, decimal?>(this, column);
         }
 
-        public IRemoteDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, long?>> propertyExpression)
+        public IRemoteDatatableColumnBuilder<TEntity, long?> Column(string header, Expression<Func<TEntity, long?>> propertyExpression)
         {
-            var propertyFunction = propertyExpression.Compile();
-            var column = new RemoteDatatableColumn<TEntity>
+            var column = new RemoteDatatableColumn<TEntity, long?>(header, propertyExpression)
             {
-                Header = header,
-                Name = ExpressionHelper.GetExpressionText(propertyExpression).Replace(".", string.Empty),
-                DisplayComponent = entity => Convert.ToString(propertyFunction(entity)),
                 PropertyFilter = new DatatablePropertyFilter<TEntity, string>
                 {
                     SearchParser = search => search,
                     SearchFilter = (entity, search) => SqlFunctions.StringConvert((double?)propertyExpression.Invoke(entity)).ToLower().Contains(search.ToLower())
                 },
-                PropertySorters = new List<IDatatablePropertySorter<TEntity>> { new DatatablePropertySorter<TEntity, long?>(propertyExpression) },
-                SearchComponent = DatatableConfiguration.Html.Components.SearchComponents.Lookup<long?>()
             };
             _remoteDatatable.Columns.Add(column);
-            return new RemoteDatatableColumnBuilder<TEntity>(this, column);
+            return new RemoteDatatableColumnBuilder<TEntity, long?>(this, column);
         }
 
-        public IRemoteDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, short?>> propertyExpression)
+        public IRemoteDatatableColumnBuilder<TEntity, short?> Column(string header, Expression<Func<TEntity, short?>> propertyExpression)
         {
-            var propertyFunction = propertyExpression.Compile();
-            var column = new RemoteDatatableColumn<TEntity>
+            var column = new RemoteDatatableColumn<TEntity, short?>(header, propertyExpression)
             {
-                Header = header,
-                Name = ExpressionHelper.GetExpressionText(propertyExpression).Replace(".", string.Empty),
-                DisplayComponent = entity => Convert.ToString(propertyFunction(entity)),
                 PropertyFilter = new DatatablePropertyFilter<TEntity, string>
                 {
                     SearchParser = search => search,
                     SearchFilter = (entity, search) => SqlFunctions.StringConvert((double?)propertyExpression.Invoke(entity)).ToLower().Contains(search.ToLower())
                 },
-                PropertySorters = new List<IDatatablePropertySorter<TEntity>> { new DatatablePropertySorter<TEntity, short?>(propertyExpression) },
-                SearchComponent = DatatableConfiguration.Html.Components.SearchComponents.Lookup<short?>()
             };
             _remoteDatatable.Columns.Add(column);
-            return new RemoteDatatableColumnBuilder<TEntity>(this, column);
+            return new RemoteDatatableColumnBuilder<TEntity, short?>(this, column);
         }
 
-        public IRemoteDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, string>> propertyExpression)
+        public IRemoteDatatableColumnBuilder<TEntity, string> Column(string header, Expression<Func<TEntity, string>> propertyExpression)
         {
-            var propertyFunction = propertyExpression.Compile();
-            var column = new RemoteDatatableColumn<TEntity>
+            var column = new RemoteDatatableColumn<TEntity, string>(header, propertyExpression)
             {
-                Header = header,
-                Name = ExpressionHelper.GetExpressionText(propertyExpression).Replace(".", string.Empty),
-                DisplayComponent = entity => Convert.ToString(propertyFunction(entity)),
                 PropertyFilter = new DatatablePropertyFilter<TEntity, string>
                 {
                     SearchParser = search => search,
                     SearchFilter = (entity, search) => propertyExpression.Invoke(entity).ToLower().Contains(search.ToLower())
                 },
-                PropertySorters = new List<IDatatablePropertySorter<TEntity>> { new DatatablePropertySorter<TEntity, string>(propertyExpression) },
-                SearchComponent = DatatableConfiguration.Html.Components.SearchComponents.Lookup<string>()
             };
             _remoteDatatable.Columns.Add(column);
-            return new RemoteDatatableColumnBuilder<TEntity>(this, column);
+            return new RemoteDatatableColumnBuilder<TEntity, string>(this, column);
         }
 
-        public IRemoteDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, DateTime?>> propertyExpression)
+        public IRemoteDatatableColumnBuilder<TEntity, DateTime?> Column(string header, Expression<Func<TEntity, DateTime?>> propertyExpression)
         {
             var propertyFunction = propertyExpression.Compile();
-            var column = new RemoteDatatableColumn<TEntity>
+            var column = new RemoteDatatableColumn<TEntity, DateTime?>(header, propertyExpression)
             {
-                Header = header,
-                Name = ExpressionHelper.GetExpressionText(propertyExpression).Replace(".", string.Empty),
-                DisplayComponent = entity => Convert.ToString(propertyFunction(entity)),
                 PropertyFilter = new DatatablePropertyFilter<TEntity, DateTime?>
                 {
                     SearchParser = search => string.IsNullOrWhiteSpace(search) ? (DateTime?) null : Convert.ToDateTime(search),
                     SearchFilter = (entity, search) => EntityFunctions.DiffDays(propertyExpression.Invoke(entity), search) == 0
                 },
-                PropertySorters = new List<IDatatablePropertySorter<TEntity>> { new DatatablePropertySorter<TEntity, DateTime?>(propertyExpression) },
-                SearchComponent = DatatableConfiguration.Html.Components.SearchComponents.Lookup<DateTime?>()
             };
             _remoteDatatable.Columns.Add(column);
-            return new RemoteDatatableColumnBuilder<TEntity>(this, column);
+            return new RemoteDatatableColumnBuilder<TEntity, DateTime?>(this, column);
         }
 
-        public IRemoteDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, TimeSpan?>> propertyExpression)
+        public IRemoteDatatableColumnBuilder<TEntity, TimeSpan?> Column(string header, Expression<Func<TEntity, TimeSpan?>> propertyExpression)
         {
-            var propertyFunction = propertyExpression.Compile();
-            var column = new RemoteDatatableColumn<TEntity>
+            var column = new RemoteDatatableColumn<TEntity, TimeSpan?>(header, propertyExpression)
             {
-                Header = header,
-                Name = ExpressionHelper.GetExpressionText(propertyExpression).Replace(".", string.Empty),
-                DisplayComponent = entity => Convert.ToString(propertyFunction(entity)),
                 PropertyFilter = new DatatablePropertyFilter<TEntity, TimeSpan?>
                 {
                     SearchParser = search => string.IsNullOrWhiteSpace(search) ? (TimeSpan?)null : TimeSpan.Parse(search),
                     SearchFilter = (entity, search) => EntityFunctions.DiffSeconds(propertyExpression.Invoke(entity), search) == 0
                 },
-                PropertySorters = new List<IDatatablePropertySorter<TEntity>> { new DatatablePropertySorter<TEntity, TimeSpan?>(propertyExpression) },
-                SearchComponent = DatatableConfiguration.Html.Components.SearchComponents.Lookup<TimeSpan?>()
             };
             _remoteDatatable.Columns.Add(column);
-            return new RemoteDatatableColumnBuilder<TEntity>(this, column);
+            return new RemoteDatatableColumnBuilder<TEntity, TimeSpan?>(this, column);
         }
 
-        public IRemoteDatatableColumnBuilder<TEntity> Column<TProperty>(string header, Expression<Func<TEntity, ICollection<TProperty>>> propertyExpression)
+        public IRemoteDatatableColumnBuilder<TEntity, ICollection<TProperty>> Column<TProperty>(string header, Expression<Func<TEntity, ICollection<TProperty>>> propertyExpression)
         {
-            var column = new RemoteDatatableColumn<TEntity>
+            var column = new RemoteDatatableColumn<TEntity, ICollection<TProperty>>(header, propertyExpression)
             {
-                Header = header,
-                Name = ExpressionHelper.GetExpressionText(propertyExpression).Replace(".", string.Empty),
                 Searchable = false,
                 Sortable = false,
-                SearchComponent = DatatableConfiguration.Html.Components.SearchComponents.Lookup<ICollection<TProperty>>()
             };
             _remoteDatatable.Columns.Add(column);
-            return new RemoteDatatableColumnBuilder<TEntity>(this, column);
+            return new RemoteDatatableColumnBuilder<TEntity, ICollection<TProperty>>(this, column);
         }
 
         public override IHtmlString ToHtml(object htmlAttributes)
@@ -249,7 +185,7 @@ namespace GenericDatatables.Datatables.Remote.Builder
             DatatableStorage.Put(_remoteDatatable);
 
             // Build HTML
-            return DatatableConfiguration.Html.Renderers.Table.RemoteDatatableRenderer.Render(HtmlHelper,
+            return DatatableConfiguration.TableRenderers.RemoteDatatableRenderer.Render(HtmlHelper,
                 _remoteDatatable,
                 htmlAttributes);
         }

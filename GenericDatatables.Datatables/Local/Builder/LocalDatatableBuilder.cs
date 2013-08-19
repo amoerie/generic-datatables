@@ -17,92 +17,87 @@ namespace GenericDatatables.Datatables.Local.Builder
         {
             _localDatatable = datatable;
         }
-        
 
         public override IHtmlString ToHtml(object htmlAttributes)
         {
-            return DatatableConfiguration.Html.Renderers.Table.LocalDatatableRenderer.Render(HtmlHelper,
-                _localDatatable,
-                htmlAttributes);
+            return DatatableConfiguration.TableRenderers.LocalDatatableRenderer.Render(HtmlHelper,_localDatatable,htmlAttributes);
         }
 
         public ILocalDatatableColumnBuilder<TEntity> Column(string header)
         {
-            var column = new LocalDatatableColumn<TEntity>
-            {
-                Header = header,
-                Name = Guid.NewGuid().ToString(),
-                SearchComponent = DatatableConfiguration.Html.Components.SearchComponents.Default
-            };
+            var column = new LocalDatatableColumn<TEntity>(header);
             _localDatatable.Columns.Add(column);
             return new LocalDatatableColumnBuilder<TEntity>(this, column);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, bool?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, bool?> Column(string header, Expression<Func<TEntity, bool?>> propertyExpression)
         {
-            var column = new LocalDatatableColumn<TEntity>
-            {
-                Header = header,
-                Name = Guid.NewGuid().ToString(),
-                DisplayComponent = DatatableConfiguration.Html.Components.DisplayComponents.Lookup<bool?>(),
-                SearchComponent = DatatableConfiguration.Html.Components.SearchComponents.Lookup<bool?>()
-            };
+            var column = new LocalDatatableColumn<TEntity, bool?>(header, propertyExpression);
             _localDatatable.Columns.Add(column);
-            return new LocalDatatableColumnBuilder<TEntity>(this, column);
+            return new LocalDatatableColumnBuilder<TEntity, bool?>(this, column);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, int?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, int?> Column(string header, Expression<Func<TEntity, int?>> propertyExpression)
         {
-            var propertyFunction = propertyExpression.Compile();
-            var column = new LocalDatatableColumn<TEntity>
-            {
-                Header = header,
-                Name = ExpressionHelper.GetExpressionText(propertyExpression),
-                DisplayComponent = DatatableConfiguration.Html.Components.DisplayComponents.Lookup<int?>(),
-                SearchComponent = DatatableConfiguration.Html.Components.SearchComponents.Lookup<int?>()
-            };
+            var column = new LocalDatatableColumn<TEntity, int?>(header, propertyExpression);
             _localDatatable.Columns.Add(column);
-            return new LocalDatatableColumnBuilder<TEntity>(this, column);
+            return new LocalDatatableColumnBuilder<TEntity, int?>(this, column);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, double?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, double?> Column(string header, Expression<Func<TEntity, double?>> propertyExpression)
         {
-            throw new NotImplementedException();
+            var column = new LocalDatatableColumn<TEntity, double?>(header, propertyExpression);
+            _localDatatable.Columns.Add(column);
+            return new LocalDatatableColumnBuilder<TEntity, double?>(this, column);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, decimal?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, decimal?> Column(string header, Expression<Func<TEntity, decimal?>> propertyExpression)
         {
-            throw new NotImplementedException();
+            var column = new LocalDatatableColumn<TEntity, decimal?>(header, propertyExpression);
+            _localDatatable.Columns.Add(column);
+            return new LocalDatatableColumnBuilder<TEntity, decimal?>(this, column);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, long?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, long?> Column(string header, Expression<Func<TEntity, long?>> propertyExpression)
         {
-            throw new NotImplementedException();
+            var column = new LocalDatatableColumn<TEntity, long?>(header, propertyExpression);
+            _localDatatable.Columns.Add(column);
+            return new LocalDatatableColumnBuilder<TEntity, long?>(this, column);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, short?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, short?> Column(string header, Expression<Func<TEntity, short?>> propertyExpression)
         {
-            throw new NotImplementedException();
+            var column = new LocalDatatableColumn<TEntity, short?>(header, propertyExpression);
+            _localDatatable.Columns.Add(column);
+            return new LocalDatatableColumnBuilder<TEntity, short?>(this, column);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, string>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, string> Column(string header, Expression<Func<TEntity, string>> propertyExpression)
         {
-            throw new NotImplementedException();
+            var column = new LocalDatatableColumn<TEntity, string>(header, propertyExpression);
+            _localDatatable.Columns.Add(column);
+            return new LocalDatatableColumnBuilder<TEntity, string>(this, column);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, DateTime?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, DateTime?> Column(string header, Expression<Func<TEntity, DateTime?>> propertyExpression)
         {
-            throw new NotImplementedException();
+            var column = new LocalDatatableColumn<TEntity, DateTime?>(header, propertyExpression);
+            _localDatatable.Columns.Add(column);
+            return new LocalDatatableColumnBuilder<TEntity, DateTime?>(this, column);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, TimeSpan?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, TimeSpan?> Column(string header, Expression<Func<TEntity, TimeSpan?>> propertyExpression)
         {
-            throw new NotImplementedException();
+            var column = new LocalDatatableColumn<TEntity, TimeSpan?>(header, propertyExpression);
+            _localDatatable.Columns.Add(column);
+            return new LocalDatatableColumnBuilder<TEntity, TimeSpan?>(this, column);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column <TProperty>(string header, Expression<Func<TEntity, ICollection<TProperty>>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, ICollection<TProperty>> Column <TProperty>(string header, Expression<Func<TEntity, ICollection<TProperty>>> propertyExpression)
         {
-            throw new NotImplementedException();
+            var column = new LocalDatatableColumn<TEntity, ICollection<TProperty>>(header, propertyExpression);
+            _localDatatable.Columns.Add(column);
+            return new LocalDatatableColumnBuilder<TEntity, ICollection<TProperty>>(this, column);
         }
     }
 }

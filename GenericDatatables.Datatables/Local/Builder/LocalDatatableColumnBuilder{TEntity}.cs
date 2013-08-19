@@ -35,59 +35,65 @@ namespace GenericDatatables.Datatables.Local.Builder
             return _localDatatableBuilder.Column(header);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, bool?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, bool?> Column(string header, Expression<Func<TEntity, bool?>> propertyExpression)
         {
             return _localDatatableBuilder.Column(header, propertyExpression);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, int?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, int?> Column(string header, Expression<Func<TEntity, int?>> propertyExpression)
         {
             return _localDatatableBuilder.Column(header, propertyExpression);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, double?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, double?> Column(string header, Expression<Func<TEntity, double?>> propertyExpression)
         {
             return _localDatatableBuilder.Column(header, propertyExpression);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, decimal?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, decimal?> Column(string header, Expression<Func<TEntity, decimal?>> propertyExpression)
         {
             return _localDatatableBuilder.Column(header, propertyExpression);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, long?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, long?> Column(string header, Expression<Func<TEntity, long?>> propertyExpression)
         {
             return _localDatatableBuilder.Column(header, propertyExpression);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, short?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, short?> Column(string header, Expression<Func<TEntity, short?>> propertyExpression)
         {
             return _localDatatableBuilder.Column(header, propertyExpression);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, string>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, string> Column(string header, Expression<Func<TEntity, string>> propertyExpression)
         {
             return _localDatatableBuilder.Column(header, propertyExpression);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, DateTime?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, DateTime?> Column(string header, Expression<Func<TEntity, DateTime?>> propertyExpression)
         {
             return _localDatatableBuilder.Column(header, propertyExpression);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column(string header, Expression<Func<TEntity, TimeSpan?>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, TimeSpan?> Column(string header, Expression<Func<TEntity, TimeSpan?>> propertyExpression)
         {
             return _localDatatableBuilder.Column(header, propertyExpression);
         }
 
-        public ILocalDatatableColumnBuilder<TEntity> Column <TProperty>(string header, Expression<Func<TEntity, ICollection<TProperty>>> propertyExpression)
+        public ILocalDatatableColumnBuilder<TEntity, ICollection<TNewProperty>> Column<TNewProperty>(string header, Expression<Func<TEntity, ICollection<TNewProperty>>> propertyExpression)
         {
             return _localDatatableBuilder.Column(header, propertyExpression);
         }
 
         public ILocalDatatableColumnBuilder<TEntity> Display(Func<TEntity, string> display)
         {
-            _localDatatableColumn.DisplayComponent = display;
+            _localDatatableColumn.DisplayFunction = display;
+            return this;
+        }
+
+        public ILocalDatatableColumnBuilder<TEntity> Display(Func<TEntity, IHtmlString> display)
+        {
+            _localDatatableColumn.DisplayFunction = entity => display(entity).ToHtmlString();
             return this;
         }
 
