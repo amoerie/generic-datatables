@@ -131,7 +131,6 @@ namespace GenericDatatables.Datatables.Remote.Builder
 
         public IRemoteDatatableColumnBuilder<TEntity, DateTime?> Column(string header, Expression<Func<TEntity, DateTime?>> propertyExpression)
         {
-            var propertyFunction = propertyExpression.Compile();
             var column = new RemoteDatatableColumn<TEntity, DateTime?>(header, propertyExpression)
             {
                 PropertyFilter = new DatatablePropertyFilter<TEntity, DateTime?>

@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace GenericDatatables.Datatables.Base
 {
-    public abstract class DatatableBuilder<TEntity> : IDatatableBuilder<TEntity> where TEntity : class
+    public abstract class DatatableBuilder<TEntity> : IDatatableBuilder where TEntity : class
     {
         protected readonly Datatable<TEntity> Datatable;
         protected readonly HtmlHelper HtmlHelper;

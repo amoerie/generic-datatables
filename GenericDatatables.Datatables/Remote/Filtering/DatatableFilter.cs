@@ -87,7 +87,7 @@ namespace GenericDatatables.Datatables.Remote.Filtering
 
         public override string ToString()
         {
-            return string.Format("EntityFilter: {0}", EntityFilter);
+            return EntityFilter.ToString();
         }
     }
 }

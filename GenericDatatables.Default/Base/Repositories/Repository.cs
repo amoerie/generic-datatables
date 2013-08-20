@@ -41,7 +41,7 @@ namespace GenericDatatables.Default.Base.Repositories
         {
             var entities = _entities;
             if (includer != null)
-                entities = includer.AddInclusions(entities);
+                entities = includer.ExecuteInclusions(entities);
             entities = entities.AsExpandable().Where(e => !e.Deleted);
             if (filter != null)
                 entities = filter.Filter(entities);

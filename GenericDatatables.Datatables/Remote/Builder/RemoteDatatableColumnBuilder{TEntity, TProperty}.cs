@@ -12,14 +12,13 @@ using GenericDatatables.Datatables.Remote.Filtering;
 
 namespace GenericDatatables.Datatables.Remote.Builder
 {
-    public class RemoteDatatableColumnBuilder<TEntity, TProperty>: IRemoteDatatableColumnBuilder<TEntity, TProperty> where TEntity : Entity
+    public class RemoteDatatableColumnBuilder<TEntity, TProperty>: RemoteDatatableColumnBuilderBase<TEntity>, IRemoteDatatableColumnBuilder<TEntity, TProperty> where TEntity : Entity
     {
-        private readonly IRemoteDatatableBuilder<TEntity> _remoteDatatableBuilder;
         private readonly RemoteDatatableColumn<TEntity, TProperty> _remoteDatatableColumn;
 
         internal RemoteDatatableColumnBuilder(IRemoteDatatableBuilder<TEntity> remoteDatatableBuilder, RemoteDatatableColumn<TEntity, TProperty> remoteDatatableColumn)
+            : base(remoteDatatableBuilder)
         {
-            _remoteDatatableBuilder = remoteDatatableBuilder;
             _remoteDatatableColumn = remoteDatatableColumn;
         }
 
@@ -103,71 +102,6 @@ namespace GenericDatatables.Datatables.Remote.Builder
         {
             _remoteDatatableColumn.SearchComponent = searchComponent;
             return this;
-        }
-
-        public IRemoteDatatableColumnBuilder<TEntity> Column(string header)
-        {
-            return _remoteDatatableBuilder.Column(header);
-        }
-
-        public IRemoteDatatableColumnBuilder<TEntity, bool?> Column(string header, Expression<Func<TEntity, bool?>> propertyExpression)
-        {
-            return _remoteDatatableBuilder.Column(header, propertyExpression);
-        }
-
-        public IRemoteDatatableColumnBuilder<TEntity, int?> Column(string header, Expression<Func<TEntity, int?>> propertyExpression)
-        {
-            return _remoteDatatableBuilder.Column(header, propertyExpression);
-        }
-
-        public IRemoteDatatableColumnBuilder<TEntity, double?> Column(string header, Expression<Func<TEntity, double?>> propertyExpression)
-        {
-            return _remoteDatatableBuilder.Column(header, propertyExpression);
-        }
-
-        public IRemoteDatatableColumnBuilder<TEntity, decimal?> Column(string header, Expression<Func<TEntity, decimal?>> propertyExpression)
-        {
-            return _remoteDatatableBuilder.Column(header, propertyExpression);
-        }
-
-        public IRemoteDatatableColumnBuilder<TEntity, long?> Column(string header, Expression<Func<TEntity, long?>> propertyExpression)
-        {
-            return _remoteDatatableBuilder.Column(header, propertyExpression);
-        }
-
-        public IRemoteDatatableColumnBuilder<TEntity, short?> Column(string header, Expression<Func<TEntity, short?>> propertyExpression)
-        {
-            return _remoteDatatableBuilder.Column(header, propertyExpression);
-        }
-
-        public IRemoteDatatableColumnBuilder<TEntity, string> Column(string header, Expression<Func<TEntity, string>> propertyExpression)
-        {
-            return _remoteDatatableBuilder.Column(header, propertyExpression);
-        }
-
-        public IRemoteDatatableColumnBuilder<TEntity, DateTime?> Column(string header, Expression<Func<TEntity, DateTime?>> propertyExpression)
-        {
-            return _remoteDatatableBuilder.Column(header, propertyExpression);
-        }
-
-        public IRemoteDatatableColumnBuilder<TEntity, TimeSpan?> Column(string header, Expression<Func<TEntity, TimeSpan?>> propertyExpression)
-        {
-            return _remoteDatatableBuilder.Column(header, propertyExpression);
-        }
-
-        public IRemoteDatatableColumnBuilder<TEntity, ICollection<TProperty1>> Column <TProperty1>(string header, Expression<Func<TEntity, ICollection<TProperty1>>> propertyExpression)
-        {
-            return _remoteDatatableBuilder.Column(header, propertyExpression);
-        }
-
-        public IHtmlString ToHtml()
-        {
-            return _remoteDatatableBuilder.ToHtml();
-        }
-
-        public IHtmlString ToHtml(object htmlAttributes)
-        {
-            return _remoteDatatableBuilder.ToHtml(htmlAttributes);
         }
     }
 }

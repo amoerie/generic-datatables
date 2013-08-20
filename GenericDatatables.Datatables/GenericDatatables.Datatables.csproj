@@ -63,7 +63,7 @@
     <Compile Include="Base\DatatableBuilder.cs" />
     <Compile Include="Base\DatatableColumn{TEntity}.cs" />
     <Compile Include="Config\DatatableConfig.cs" />
-    <Compile Include="Html\Components\DisplayComponents\FontAwesomeBooleanDisplayComponent.cs" />
+    <Compile Include="Html\Components\DisplayComponents\GlyphiconsBooleanDisplayComponent.cs" />
     <Compile Include="Html\Components\DisplayComponents\IDisplayComponent.cs" />
     <Compile Include="Html\TableRenderers\ILocalDatatableRenderer.cs" />
     <Compile Include="Html\TableRenderers\IRemoteDatatableRenderer.cs" />
@@ -76,6 +76,7 @@
     <Compile Include="Local\ILocalDatatableColumn{TEntity, TProperty}.cs" />
     <Compile Include="Local\LocalDatatableColumn{TEntity, TProperty}.cs" />
     <Compile Include="Remote\Builder\IRemoteDatatableColumnBuilder{TEntity, TProperty}.cs" />
+    <Compile Include="Remote\Builder\RemoteDatatableColumnBuilderBase.cs" />
     <Compile Include="Remote\Builder\RemoteDatatableColumnBuilder{TEntity, TProperty}.cs" />
     <Compile Include="Remote\IRemoteDatatableColumn{TEntity, TProperty}.cs" />
     <Compile Include="Remote\RemoteDatatableColumn{TEntity, TProperty}.cs" />

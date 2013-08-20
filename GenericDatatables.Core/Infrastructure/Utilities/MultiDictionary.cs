@@ -10,11 +10,6 @@ namespace GenericDatatables.Core.Infrastructure.Utilities
 {
     public class MultiDictionary<TKey, TValue> : Dictionary<TKey, ISet<TValue>>, IMultiDictionary<TKey, TValue>
     {
-        public MultiDictionary()
-            : base()
-        {
-        }
-
         public void Add(TKey key, TValue value)
         {
             ISet<TValue> container;

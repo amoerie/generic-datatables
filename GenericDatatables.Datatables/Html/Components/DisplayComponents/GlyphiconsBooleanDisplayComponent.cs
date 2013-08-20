@@ -12,7 +12,7 @@ using GenericDatatables.Datatables.Extensions;
 
 namespace GenericDatatables.Datatables.Html.Components.DisplayComponents
 {
-    public class FontAwesomeBooleanDisplayComponent: IDisplayComponent<bool?>
+    public class GlyphiconsBooleanDisplayComponent: IDisplayComponent<bool?>
     {
         public IHtmlString ToHtml <TEntity>(TEntity entity, IDatatableColumn<TEntity, bool?> datatableColumn) where TEntity : class
         {

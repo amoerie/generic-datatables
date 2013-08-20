@@ -37,9 +37,9 @@ namespace GenericDatatables.Datatables.Config
 
             public static class DisplayComponents
             {
-                private static readonly FontAwesomeBooleanDisplayComponent FontAwesomeBooleanDisplayComponent = new FontAwesomeBooleanDisplayComponent();
+                private static readonly GlyphiconsBooleanDisplayComponent GlyphiconsBooleanDisplayComponent = new GlyphiconsBooleanDisplayComponent();
 
-                public static FontAwesomeBooleanDisplayComponent FontAwesomeBoolean { get { return FontAwesomeBooleanDisplayComponent; } }
+                public static GlyphiconsBooleanDisplayComponent GlyphiconsBoolean { get { return GlyphiconsBooleanDisplayComponent; } }
             }
 
             public static class TableRenderers

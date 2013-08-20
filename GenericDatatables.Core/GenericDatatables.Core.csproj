@@ -66,11 +66,10 @@
     <Compile Include="Infrastructure\Filtering\EntityFilter.cs" />
     <Compile Include="Infrastructure\Filtering\ExtensionsForIEntityFilter.cs" />
     <Compile Include="Infrastructure\Filtering\WhereEntityFilter.cs" />
-    <Compile Include="Infrastructure\Including\DummyPropertyInclusionHolder.cs" />
+    <Compile Include="Infrastructure\Including\EmptyEntityIncluder.cs" />
     <Compile Include="Infrastructure\Including\EntityIncluder.cs" />
     <Compile Include="Infrastructure\Including\ExtensionsForIEntityIncluder.cs" />
-    <Compile Include="Infrastructure\Including\IPropertyInclusionHolder.cs" />
-    <Compile Include="Infrastructure\Including\PropertyInclusionHolder.cs" />
+    <Compile Include="Infrastructure\Including\PropertyEntityIncluder.cs" />
     <Compile Include="Infrastructure\Sorting\EntitySorter.cs" />
     <Compile Include="Infrastructure\Sorting\EntitySorterBuilder.cs" />
     <Compile Include="Infrastructure\Sorting\ExtensionsForIEntitySorter.cs" />

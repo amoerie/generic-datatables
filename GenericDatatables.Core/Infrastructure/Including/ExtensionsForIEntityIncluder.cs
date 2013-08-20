@@ -50,7 +50,7 @@ namespace GenericDatatables.Core.Infrastructure.Including
         /// <returns>An instance of <see cref="IEntityIncluder{TEntity}"/> containing the included properties</returns>
         public static IEntityIncluder<TEntity> And<TEntity, TProperty>(this IEntityIncluder<TEntity> includer, Expression<Func<TEntity, TProperty>> property) where TEntity : class
         {
-            return new EntityIncluder<TEntity>(includer, new PropertyInclusionHolder<TEntity, TProperty>(property));
+            return new PropertyEntityIncluder<TEntity, TProperty>(includer, property);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace GenericDatatables.Datatables.Local.Builder
     ///     Builder for a <see cref="LocalDatatable{TEntity}" />
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public interface ILocalDatatableBuilder<TEntity> : IDatatableBuilder<TEntity> where TEntity : class
+    public interface ILocalDatatableBuilder<TEntity> : IDatatableBuilder where TEntity : class
     {
         // adds a display column to the datatable 
         ILocalDatatableColumnBuilder<TEntity> Column([NotNull] string header);
