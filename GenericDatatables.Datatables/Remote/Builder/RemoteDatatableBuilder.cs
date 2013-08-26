@@ -11,6 +11,7 @@ using GenericDatatables.Datatables.Base;
 using GenericDatatables.Datatables.Config;
 using GenericDatatables.Datatables.Extensions;
 using GenericDatatables.Datatables.Remote.Filtering;
+using HtmlBuilders;
 using LinqKit;
 
 namespace GenericDatatables.Datatables.Remote.Builder
@@ -173,11 +174,11 @@ namespace GenericDatatables.Datatables.Remote.Builder
             var validationResults = _remoteDatatable.Validate().ToList();
             if (validationResults.Any())
             {
-                var div = new TagBuilder("div").Class("warning");
-                var validationList = new TagBuilder("ul");
+                var div = new HtmlTag("div").Class("warning");
+                var validationList = new HtmlTag("ul");
                 foreach (var validationResult in validationResults)
-                    validationList.AppendHtml(new TagBuilder("li").Html(validationResult.Message));
-                return div.Html(validationList).ToHtml();
+                    validationList.Append(new HtmlTag("li").Append(validationResult.Message));
+                return div.Append(validationList).ToHtml();
             }
 
             // Store datatable in storage

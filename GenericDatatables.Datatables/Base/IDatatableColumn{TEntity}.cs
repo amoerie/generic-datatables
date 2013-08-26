@@ -64,6 +64,6 @@ namespace GenericDatatables.Datatables.Base
 
         IEnumerable<DatatableValidationResult> Validate();
 
-        void SetAttributes(TagBuilder th);
+        IDictionary<string, string> GetAttributes();
     }
 }

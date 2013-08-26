@@ -3,6 +3,7 @@ using GenericDatatables.Core.Domain.Models;
 using GenericDatatables.Core.Domain.Repositories;
 using GenericDatatables.Core.Infrastructure.Including;
 using GenericDatatables.Datatables.Remote;
+using GenericDatatables.Datatables.Remote.Processors;
 using GenericDatatables.Datatables.Remote.Reply;
 using GenericDatatables.Datatables.Remote.Request;
 using GenericDatatables.Web.Extensions;
@@ -27,8 +28,8 @@ namespace GenericDatatables.Web.Controllers
         {
             var gymMemberTable = DatatableStorage.Get<GymMember>(request.DatatableId, () => this.RenderView("_GymMemberList"));
             var includer = EntityIncluder<GymMember>.Include(g => g.Excercises);
-            var replier = new DatatableReplier<GymMember>(gymMemberTable, _gymMembers, baseIncluder: includer);
-            return replier.Reply(request);
+            var replier = new DatatableReplier<GymMember>(gymMemberTable, new QueryableDatatableProcessor<GymMember>(_gymMembers.List(includer: includer)));
+            return replier.Reply(request).ToJson();
         }
 
         public ActionResult About()

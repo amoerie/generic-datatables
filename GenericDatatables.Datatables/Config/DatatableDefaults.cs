@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using GenericDatatables.Datatables.Html.Components.DisplayComponents;
+using GenericDatatables.Datatables.Html.Components.SearchComponents;
 using GenericDatatables.Datatables.Html.SearchComponents;
 using GenericDatatables.Datatables.Html.TableRenderers;
 

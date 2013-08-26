@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Web.Mvc;
-using GenericDatatables.Datatables.Extensions;
-using GenericDatatables.Datatables.Html.Components.DisplayComponents;
 using GenericDatatables.Datatables.Html.SearchComponents;
 using GenericDatatables.Datatables.Validation;
 
@@ -39,15 +37,17 @@ namespace GenericDatatables.Datatables.Base
 
         protected abstract IEnumerable<DatatableValidationResult> InternalValidate();
 
-        public void SetAttributes(TagBuilder th)
+        public IDictionary<string, string> GetAttributes()
         {
-            th
-                .Attribute("data-width", Width ?? string.Empty)
-                .Attribute("data-searchable", Searchable.ToString(CultureInfo.InvariantCulture).ToLower())
-                .Attribute("data-sortable", Sortable.ToString(CultureInfo.InvariantCulture).ToLower())
-                .Attribute("data-visible", Visible.ToString(CultureInfo.InvariantCulture).ToLower())
-                .Attribute("data-class", Class ?? string.Empty)
-                .Attribute("data-default-content", DefaultContent ?? string.Empty);
+            return new Dictionary<string, string>
+            {
+                {"data-width", Width ?? string.Empty },
+                {"data-searchable", Searchable.ToString(CultureInfo.InvariantCulture).ToLower() },
+                {"data-sortable", Sortable.ToString(CultureInfo.InvariantCulture).ToLower() },
+                {"data-visible", Visible.ToString(CultureInfo.InvariantCulture).ToLower() },
+                {"data-class", Class ?? string.Empty },
+                {"data-default-content", DefaultContent ?? string.Empty }
+            };
         }
 
         public string Display(HtmlHelper htmlHelper, TEntity entity)

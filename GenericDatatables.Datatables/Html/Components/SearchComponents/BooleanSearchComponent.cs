@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using GenericDatatables.Datatables.Base;
 using GenericDatatables.Datatables.Extensions;
+using HtmlBuilders;
 
 namespace GenericDatatables.Datatables.Html.SearchComponents
 {
@@ -9,12 +10,12 @@ namespace GenericDatatables.Datatables.Html.SearchComponents
     {
         public IHtmlString ToHtml <TEntity>(HtmlHelper htmlHelper, IDatatableColumn<TEntity> column) where TEntity : class
         {
-            return new TagBuilder("select").Attribute("name", column.Name)
+            return new HtmlTag("select").Attribute("name", column.Name)
                 .Class("datatable-column-filter")
-                .AppendHtml(new TagBuilder("option").Attribute("value", "").Html("All"))
-                .AppendHtml(new TagBuilder("option").Attribute("value", "null").Html("Not specified"))
-                .AppendHtml(new TagBuilder("option").Attribute("value", "true").Html("Yes"))
-                .AppendHtml(new TagBuilder("option").Attribute("value", "false").Html("No"))
+                .Append(new HtmlTag("option").Attribute("value", "").Append("All"))
+                .Append(new HtmlTag("option").Attribute("value", "null").Append("Not specified"))
+                .Append(new HtmlTag("option").Attribute("value", "true").Append("Yes"))
+                .Append(new HtmlTag("option").Attribute("value", "false").Append("No"))
                 .ToHtml();
         }
     }

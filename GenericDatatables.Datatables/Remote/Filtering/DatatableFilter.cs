@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using GenericDatatables.Core.Base.Contracts;
-using GenericDatatables.Core.Base.Models;
 using GenericDatatables.Core.Infrastructure.Filtering;
 using GenericDatatables.Datatables.Remote.Request;
 using LinqKit;
@@ -14,7 +13,7 @@ namespace GenericDatatables.Datatables.Remote.Filtering
     /// Custom filter that implements <see cref="IEntityFilter{TEntity}"/> and provides filtering logic for a <see cref="Datatable"/>
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public class DatatableFilter<TEntity>: IEntityFilter<TEntity> where TEntity : Entity
+    public class DatatableFilter<TEntity>: IEntityFilter<TEntity> where TEntity : class 
     {
         private RemoteDatatable<TEntity> Datatable { get; set; }
         private DatatableRequest Request { get; set; }
@@ -63,14 +62,14 @@ namespace GenericDatatables.Datatables.Remote.Filtering
             if (globalFilter.Predicates.Any())
             {
                 var globalSearchPredicate = globalFilter.Predicates
-                    .Aggregate(PredicateBuilder.False<TEntity>(), (accumulate, predicate) => accumulate.Or(predicate));
+                    .Aggregate(PredicateBuilder.False<TEntity>(), (accumulate, predicate) => accumulate.Or(predicate)).Expand();
                 EntityFilter = EntityFilter.Where(globalSearchPredicate);
             }
 
             if (propertyFilter.Predicates.Any())
             {
                 var propertySpecificPredicate = propertyFilter.Predicates
-                    .Aggregate(PredicateBuilder.True<TEntity>(),(accumulate, predicate) => accumulate.And(predicate));
+                    .Aggregate(PredicateBuilder.True<TEntity>(),(accumulate, predicate) => accumulate.And(predicate)).Expand();
                 EntityFilter = EntityFilter.Where(propertySpecificPredicate);
             }
         }

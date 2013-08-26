@@ -13,7 +13,7 @@ using GenericDatatables.Datatables.Validation;
 
 namespace GenericDatatables.Datatables.Base
 {
-    public abstract class DatatableColumn<TEntity, TProperty>: IDatatableColumn<TEntity, TProperty> where TEntity : class
+    public abstract class DatatableColumn<TEntity, TProperty> : IDatatableColumn<TEntity, TProperty> where TEntity : class
     {
         private Expression<Func<TEntity, TProperty>> _propertyExpression;
         private Func<TEntity, TProperty> _propertyFunction;
@@ -31,14 +31,16 @@ namespace GenericDatatables.Datatables.Base
         public Expression<Func<TEntity, TProperty>> PropertyExpression
         {
             get { return _propertyExpression; }
-            set { _propertyExpression = value;
+            set
+            {
+                _propertyExpression = value;
                 _propertyFunction = value.Compile();
             }
         }
 
         public TProperty GetProperty(TEntity entity)
         {
-            if(_propertyFunction == null)
+            if (_propertyFunction == null)
                 throw new InvalidOperationException(Description + " cannot get property, no property function defined");
             return _propertyFunction(entity);
         }
@@ -63,15 +65,17 @@ namespace GenericDatatables.Datatables.Base
 
         protected abstract IEnumerable<DatatableValidationResult> InternalValidate();
 
-        public void SetAttributes(TagBuilder th)
+        public IDictionary<string, string> GetAttributes()
         {
-            th
-                .Attribute("data-width", Width ?? string.Empty)
-                .Attribute("data-searchable", Searchable.ToString(CultureInfo.InvariantCulture).ToLower())
-                .Attribute("data-sortable", Sortable.ToString(CultureInfo.InvariantCulture).ToLower())
-                .Attribute("data-visible", Visible.ToString(CultureInfo.InvariantCulture).ToLower())
-                .Attribute("data-class", Class ?? string.Empty)
-                .Attribute("data-default-content", DefaultContent ?? string.Empty);
+            return new Dictionary<string, string>
+            {
+                {"data-width", Width ?? string.Empty },
+                {"data-searchable", Searchable.ToString(CultureInfo.InvariantCulture).ToLower() },
+                {"data-sortable", Sortable.ToString(CultureInfo.InvariantCulture).ToLower() },
+                {"data-visible", Visible.ToString(CultureInfo.InvariantCulture).ToLower() },
+                {"data-class", Class ?? string.Empty },
+                {"data-default-content", DefaultContent ?? string.Empty }
+            };
         }
     }
 }

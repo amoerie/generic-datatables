@@ -9,9 +9,15 @@ namespace GenericDatatables.Datatables.Remote.Sorting
     /// Custom sorter that implements <see cref="IEntitySorter{TEntity}"/> and provides sorting logic for a <see cref="Datatable"/>
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public class DatatableSorter<TEntity>: IEntitySorter<TEntity> where TEntity : Entity
+    public class DatatableSorter<TEntity>: IEntitySorter<TEntity> where TEntity : class
     {
-        private IEntitySorter<TEntity> EntitySorter { get; set; } 
+        private IEntitySorter<TEntity> EntitySorter { get; set; }
+
+        private RemoteDatatable<TEntity> Datatable { get; set; }
+        private DatatableRequest Request { get; set; }
+
+        private const string Ascending = "asc";
+        private const string Descending = "desc";
 
         public DatatableSorter(IEntitySorter<TEntity> baseSorter, RemoteDatatable<TEntity> datatable, DatatableRequest request)
         {
@@ -20,12 +26,6 @@ namespace GenericDatatables.Datatables.Remote.Sorting
             EntitySorter = baseSorter;
             MakeSorter();
         }
-
-        private RemoteDatatable<TEntity> Datatable { get; set; }
-        private DatatableRequest Request { get; set; }
-
-        private const string Ascending = "asc";
-        private const string Descending = "desc";
 
         private void MakeSorter()
         {
@@ -61,7 +61,7 @@ namespace GenericDatatables.Datatables.Remote.Sorting
             }
             if (EntitySorter == null)
             {
-                EntitySorter = Datatable.Columns.First().Sort(null, SortDirection.Ascending);
+                EntitySorter = Datatable.Columns.First(c => c.Sortable).Sort(null, SortDirection.Ascending);
             }
         }
 

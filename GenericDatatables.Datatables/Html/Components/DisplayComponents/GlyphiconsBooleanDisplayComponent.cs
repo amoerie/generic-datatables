@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using GenericDatatables.Datatables.Base;
 using GenericDatatables.Datatables.Extensions;
+using HtmlBuilders;
 
 namespace GenericDatatables.Datatables.Html.Components.DisplayComponents
 {
@@ -22,9 +23,9 @@ namespace GenericDatatables.Datatables.Html.Components.DisplayComponents
                 case null:
                     return MvcHtmlString.Create(string.Empty);
                 case false:
-                    return new TagBuilder("i").Class("icon-check-empty").ToHtml();
+                    return new HtmlTag("i").Class("icon-check-empty").ToHtml();
                 default:
-                    return new TagBuilder("i").Class("icon-check").ToHtml();
+                    return new HtmlTag("i").Class("icon-check").ToHtml();
             }
         }
     }

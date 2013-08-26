@@ -36,6 +36,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlBuilders">
+      <HintPath>..\packages\HtmlBuilders.1.0.4\lib\net45\HtmlBuilders.dll</HintPath>
+    </Reference>
     <Reference Include="LinqKit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\LinqKit.1.0\lib\35\LinqKit.dll</HintPath>
@@ -79,10 +85,12 @@
     <Compile Include="Remote\Builder\RemoteDatatableColumnBuilderBase.cs" />
     <Compile Include="Remote\Builder\RemoteDatatableColumnBuilder{TEntity, TProperty}.cs" />
     <Compile Include="Remote\IRemoteDatatableColumn{TEntity, TProperty}.cs" />
+    <Compile Include="Remote\Processors\IDatatableProcessor.cs" />
+    <Compile Include="Remote\Processors\QueryableDatatableProcessor.cs" />
+    <Compile Include="Remote\Processors\RepositoryDatatableProcessor.cs" />
     <Compile Include="Remote\RemoteDatatableColumn{TEntity, TProperty}.cs" />
     <Compile Include="Validation\DatatableValidationResult.cs" />
     <Compile Include="Extensions\ExtensionsForModelBindingContext.cs" />
-    <Compile Include="Extensions\ExtensionsForTagBuilder.cs" />
     <Compile Include="Html\HtmlHelpers\DatatableHelper.cs" />
     <Compile Include="Base\IDatatableBuilder.cs" />
     <Compile Include="Base\IDatatableColumn{TEntity}.cs" />

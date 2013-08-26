@@ -10,7 +10,7 @@ namespace GenericDatatables.Datatables.Remote
     /// Represents a remote datatable, of which the data can be fetched through the <see cref="Url"/>
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity for which this datatable was made</typeparam>
-    public class RemoteDatatable<TEntity> : Datatable<TEntity> where TEntity : Entity
+    public class RemoteDatatable<TEntity> : Datatable<TEntity> where TEntity : class
     {
         private ICollection<IRemoteDatatableColumn<TEntity>> _columns;
 

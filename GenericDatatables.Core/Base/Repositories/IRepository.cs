@@ -10,7 +10,7 @@ namespace GenericDatatables.Core.Base.Repositories
         where TEntity : class, IDeletable, IIdentifiable
     {
         /// <summary>
-        ///     Returns the entities ordered with the <paramref name="sorter" />,
+        ///     Returns the <see cref="IQueryable{TEntity}"/> of entities ordered with the <paramref name="sorter" />,
         ///     filtered by the <paramref name="filter" />, paged accordingly with the <paramref name="page" /> and
         ///     <paramref
         ///         name="pageSize" />
@@ -41,7 +41,7 @@ namespace GenericDatatables.Core.Base.Repositories
         /// </exception>
         /// 
         /// <returns>
-        ///     the entities ordered with the <paramref name="sorter" />,
+        ///     the <see cref="IQueryable{TEntity}"/> of entities ordered with the <paramref name="sorter" />,
         ///     filtered by the <paramref name="filter" />, paged accordingly with the <paramref name="page" /> and
         ///     <paramref
         ///         name="pageSize" />
